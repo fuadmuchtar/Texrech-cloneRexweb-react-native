@@ -5,10 +5,13 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
         hostname: 'image.pollinations.ai',
-        port: '',
-        search: '',
+      },
+      {
+        hostname: 'placehold.co',
+      },
+      {
+        hostname: 'rexus.id',
       },
     ],
   },
