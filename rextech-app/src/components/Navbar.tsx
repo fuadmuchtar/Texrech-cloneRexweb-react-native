@@ -9,6 +9,7 @@ import { FaSearch, FaUser, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { NavDropdown, Offcanvas } from 'react-bootstrap';
 import Link from 'next/link';
 import { useState } from 'react';
+import FormComponent from './Form';
 
 export default function NavbarComponent() {
     const [show, setShow] = useState(false);
@@ -43,9 +44,6 @@ export default function NavbarComponent() {
                     </Nav>
 
                     <div className="d-flex align-items-center me-3">
-                        {/* <Link href="/login" className="text-decoration-none fw-bold text-dark">
-                            LOGIN & REGISTER
-                        </Link> */}
                         <Button variant="link" className='text-decoration-none fw-bold text-dark' onClick={handleShow}>
                             LOGIN & REGISTER
                         </Button>
@@ -98,8 +96,7 @@ export default function NavbarComponent() {
                     <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the elements you
-                    have chosen. Like, text, images, lists, etc.
+                    <FormComponent />
                 </Offcanvas.Body>
             </Offcanvas>
         </Navbar>

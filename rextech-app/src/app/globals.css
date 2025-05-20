@@ -1,8 +1,9 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import "tailwindcss";
+@import 'animate.css';
+/* @import "tailwindcss";
 @plugin "daisyui" {
    themes: light;
- }
+ } */
 /* 
 :root {
   --background: #ffffff;
@@ -28,3 +29,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+:root {
+  --rexus-blue: #1e3d73; /* Adjust to match exact color */
+}
+
+.text-primary {
+  color: var(--rexus-blue) !important;
+}
+
+.bg-primary {
+  background-color: var(--rexus-blue) !important;
+}
+
+.btn-primary {
+  background-color: var(--rexus-blue) !important;
+  border-color: var(--rexus-blue) !important;
+}
