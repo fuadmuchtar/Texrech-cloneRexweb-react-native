@@ -29,8 +29,8 @@ export default function NavbarComponent() {
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="me-auto">
-                        <Nav.Link href="#" className="fw-semibold text-primary">DAXA</Nav.Link>
-                        <NavDropdown title="PRODUK" id="basic-nav-dropdown" className="fw-semibold">
+                        <Nav.Link href="products" className="fw-semibold">PRODUCT</Nav.Link>
+                        {/* <NavDropdown title="PRODUK" id="basic-nav-dropdown" className="fw-semibold">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
@@ -40,7 +40,7 @@ export default function NavbarComponent() {
                             <NavDropdown.Item href="#action/3.4">
                                 Separated link
                             </NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
 
                     <div className="d-flex align-items-center me-3">
@@ -93,7 +93,7 @@ export default function NavbarComponent() {
             </Container>
             <Offcanvas show={show} onHide={handleClose} placement='end'>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                    {/* <Offcanvas.Title>Offcanvas</Offcanvas.Title> */}
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <FormComponent />
