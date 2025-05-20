@@ -6,10 +6,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { FaSearch, FaUser, FaHeart, FaShoppingCart } from 'react-icons/fa';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Offcanvas } from 'react-bootstrap';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function NavbarComponent() {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
         <Navbar expand="lg" className="bg-white shadow-sm py-2">
@@ -38,9 +43,13 @@ export default function NavbarComponent() {
                     </Nav>
 
                     <div className="d-flex align-items-center me-3">
-                        <Link href="/login" className="text-decoration-none fw-bold text-dark">
+                        {/* <Link href="/login" className="text-decoration-none fw-bold text-dark">
                             LOGIN & REGISTER
-                        </Link>
+                        </Link> */}
+                        <Button variant="link" className='text-decoration-none fw-bold text-dark' onClick={handleShow}>
+                            LOGIN & REGISTER
+                        </Button>
+
                     </div>
 
                     <Form className="d-flex me-3 position-relative">
@@ -84,6 +93,15 @@ export default function NavbarComponent() {
                     </div>
                 </Navbar.Collapse>
             </Container>
+            <Offcanvas show={show} onHide={handleClose} placement='end'>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    Some text as placeholder. In real life you can have the elements you
+                    have chosen. Like, text, images, lists, etc.
+                </Offcanvas.Body>
+            </Offcanvas>
         </Navbar>
     );
 }
