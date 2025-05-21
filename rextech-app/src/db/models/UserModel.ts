@@ -19,7 +19,7 @@ export class UserModel {
     }
 
     static async create(user: NewUser) {
-        NewUserSchema.parse(user); // Validate the user data
+        NewUserSchema.parse(user);
 
         const userExists = await this.collection().findOne({
             $or: [
