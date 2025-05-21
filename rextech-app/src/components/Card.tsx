@@ -1,28 +1,69 @@
 "use client";
 
-import { Container } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useState } from "react";
+import Link from "next/link";
+import { ProductType } from "@/app/types";
+import { toRupiah } from "@/helpers/convertCurrency";
 
-export default function CardProducts() {
+export default function CardProducts({ product }: { product: ProductType }) {
+  const [wishlisted, setWishlisted] = useState<string[]>([]);
+
+  const toggleWishlist = (slug: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (wishlisted.includes(slug)) {
+      setWishlisted(wishlisted.filter((id) => id !== slug));
+    } else {
+      setWishlisted([...wishlisted, slug]);
+    }
+  };
+
   return (
-    <Row xs={1} md={4} className="g-4">
-      {Array.from({ length: 20 }).map((_, idx) => (
-        <Col key={idx}>
-          <Card>
-            <Card.Img variant="top" src="holder.js/100px160" />
-            <Card.Body>
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+    <Col className="mb-4">
+      <Card border="0">
+        <div className="position-relative">
+          <Link href={`/products/${product.slug}`}>
+            <Card.Img
+              variant="top"
+              src={product.thumbnail}
+              alt={product.name}
+              style={{ cursor: "pointer" }}
+            />
+          </Link>
+
+          <div
+            className="position-absolute top-0 end-0 m-2"
+            onClick={(e) => toggleWishlist(product.slug, e)}
+            style={{ cursor: "pointer", zIndex: 2 }}
+          >
+            <div
+              className="rounded-circle bg-white p-2 d-flex justify-content-center align-items-center shadow-sm"
+              style={{ width: "36px", height: "36px" }}
+            >
+              {wishlisted.includes(product.slug) ? (
+                <FaHeart className="text-danger" />
+              ) : (
+                <FaRegHeart className="text-secondary" />
+              )}
+            </div>
+          </div>
+        </div>
+
+        <Card.Body>
+          <Link href={`/products/${product.slug}`} className="text-decoration-none">
+            <Card.Title
+              style={{ cursor: "pointer", color: "#212529" }}
+              className="hover-underline"
+            >
+              {product.name}
+            </Card.Title>
+          </Link>
+          <Card.Text>Rp {toRupiah(product.price)}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 }

@@ -35,4 +35,12 @@ export class UserModel {
         await this.collection().insertOne(user);
         return "User created successfully"
     }
+
+    static async findByEmail(email: string) {
+        const user = await this.collection().findOne({
+            email: { $regex: email, $options: "i" }
+        })
+
+        return user
+    }
 }
