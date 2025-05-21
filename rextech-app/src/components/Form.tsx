@@ -17,7 +17,7 @@ export default function FormComponent() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (mode === "login") {
-            console.log("Login", { email, password });
+            
         } else {
             console.log("Register", { name, username, email, password });
         }
@@ -29,7 +29,7 @@ export default function FormComponent() {
                 <p className="fw-bold fs-5 text-center" style={{ borderBottom: "1 px solid" }}>{mode === "login" ? "LOGIN" : "REGISTER"}</p>
                 <hr className='mb-5' />
             </div>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className='animate__fadeInDown animate__animated'>
                 {mode === "register" && (
                     <>
                         <Form.Group className="mb-3" controlId="formBasicName">

@@ -1,19 +1,46 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import CarouselComponent from "@/components/Carousel";
 import ImageCardComponent from "@/components/ImageCard";
 import { Container } from "react-bootstrap";
 
 export default function Home() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const imageCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__fadeInUp', 'animate__animated', 'animate__slow');
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (cardsRef.current) observer.observe(cardsRef.current);
+    if (imageCardsRef.current) observer.observe(imageCardsRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <CarouselComponent />
-      <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+
+      <div ref={sectionRef} className="d-flex flex-column align-items-center justify-content-center mt-5">
         <h1 className="fw-bold fs-2">SPECIAL DEALS</h1>
         <p className="mb-4 text-center">
           Temukan penawaran menarik dan produk terbaru dari REXTECH. Jangan lewatkan kesempatan untuk mendapatkan produk berkualitas dengan harga terbaik!
         </p>
       </div>
-      <Container className="d-flex flex-row gap-5 align-items-center justify-content-center mt-5 mb-5">
-        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500 }}>
+
+      <Container ref={cardsRef} className="d-flex flex-row gap-5 align-items-center justify-content-center mt-5 mb-5">
+        {/* Card content remains the same */}
+        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500, padding: 30 }}>
           <div className="row g-0">
             <div className="col-md-4">
               <img src="https://rexus.id/cdn/shop/files/Daxa_Sedna_7_625c6c76-85f0-4489-a6be-2df77052e75e.png?v=1737622106&width=500" className="img-fluid rounded-start" alt="..." />
@@ -32,7 +59,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500 }}>
+        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500, padding: 30 }}>
           <div className="row g-0">
             <div className="col-md-4">
               <img src="https://rexus.id/cdn/shop/files/Daxa_Sedna_7_625c6c76-85f0-4489-a6be-2df77052e75e.png?v=1737622106&width=500" className="img-fluid rounded-start" alt="..." />
@@ -51,7 +78,8 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <div className="container-fluid mt-5 mb-5">
+
+      <div ref={imageCardsRef} className="container-fluid mt-5 mb-5 pt-5">
         <ImageCardComponent />
       </div>
     </>
