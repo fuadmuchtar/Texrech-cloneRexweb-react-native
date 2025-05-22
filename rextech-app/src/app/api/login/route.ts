@@ -1,4 +1,4 @@
-import { UserModel } from "@/db/models/UserModel";
+import UserModel from "@/db/models/UserModel";
 import { comparePassword } from "@/helpers/bcrypt";
 import errHandler from "@/helpers/errHandler";
 import { generateToken } from "@/helpers/jwt";
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
             accessToken: token
         })
     } catch (error) {
-        errHandler(error);
+        return errHandler(error);
     }
 
 }

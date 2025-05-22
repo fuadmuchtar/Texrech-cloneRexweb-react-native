@@ -1,5 +1,6 @@
 import { NewUser } from "@/app/types";
-import { UserModel } from "@/db/models/UserModel";
+import UserModel from "@/db/models/UserModel";
+import errHandler from "@/helpers/errHandler";
 
 export async function POST(request: Request) {
     try {
@@ -8,6 +9,6 @@ export async function POST(request: Request) {
 
         return Response.json({ message: result }, { status: 201 });
     } catch (error) {
-        console.log(error)
+        return errHandler(error)
     }
 }

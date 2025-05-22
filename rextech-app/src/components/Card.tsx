@@ -9,17 +9,16 @@ import { ProductType } from "@/app/types";
 import { toRupiah } from "@/helpers/convertCurrency";
 
 export default function CardProducts({ product }: { product: ProductType }) {
-  const [wishlisted, setWishlisted] = useState<string[]>([]);
+  // const [wishlisted, setWishlisted] = useState<string[]>([]);
 
-  const toggleWishlist = (slug: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-
-    if (wishlisted.includes(slug)) {
-      setWishlisted(wishlisted.filter((id) => id !== slug));
-    } else {
-      setWishlisted([...wishlisted, slug]);
-    }
-  };
+  // const toggleWishlist = (slug: string, e: React.MouseEvent) => {
+  // e.preventDefault();
+  // if (wishlisted.includes(slug)) {
+  //   setWishlisted(wishlisted.filter((item) => item !== slug));
+  // } else {
+  //   setWishlisted([...wishlisted, slug]);
+  // }
+  // };
 
   return (
     <Col className="mb-4">
@@ -36,14 +35,14 @@ export default function CardProducts({ product }: { product: ProductType }) {
 
           <div
             className="position-absolute top-0 end-0 m-2"
-            onClick={(e) => toggleWishlist(product.slug, e)}
             style={{ cursor: "pointer", zIndex: 2 }}
           >
             <div
               className="rounded-circle bg-white p-2 d-flex justify-content-center align-items-center shadow-sm"
               style={{ width: "36px", height: "36px" }}
+              onClick={(e) => toggleWishlist(product.slug, e)}
             >
-              {wishlisted.includes(product.slug) ? (
+              {false ? (
                 <FaHeart className="text-danger" />
               ) : (
                 <FaRegHeart className="text-secondary" />

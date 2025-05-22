@@ -13,7 +13,7 @@ const NewUserSchema = z.object({
 })
 
 
-export class UserModel {
+export default class UserModel {
     static collection() {
         return db.collection("users");
     }
@@ -21,14 +21,18 @@ export class UserModel {
     static async create(user: NewUser) {
         NewUserSchema.parse(user);
 
-        const userExists = await this.collection().findOne({
-            $or: [
-                { email: { $regex: user.email, $options: 'i' } },
-                { username: { $regex: user.username, $options: 'i' } }
-            ]
+        const checkUsername = await this.collection().findOne({
+            username: { $regex: user.username, $options: 'i' }
         });
-        if (userExists) {
-            throw { status: 400, message: "User already exists" };
+        if (checkUsername) {
+            throw { status: 400, message: "Username has been taken" };
+        }
+
+        const checkEmail = await this.collection().findOne({
+            email: { $regex: user.email, $options: 'i' }
+        });
+        if (checkEmail) {
+            throw { status: 400, message: "Email address has been taken" };
         }
 
         user.password = hashPassword(user.password);

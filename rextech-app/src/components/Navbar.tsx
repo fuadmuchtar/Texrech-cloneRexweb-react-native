@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { FaSearch, FaUser, FaHeart, FaShoppingCart } from "react-icons/fa";
-import { NavDropdown, Offcanvas } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import Link from "next/link";
 import { useState } from "react";
 import FormComponent from "./Form";
@@ -14,6 +14,7 @@ import { redirect } from "next/navigation";
 
 export default function NavbarComponent() {
   const [show, setShow] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,13 +51,24 @@ export default function NavbarComponent() {
           </Nav>
 
           <div className="d-flex align-items-center me-3">
-            <Button
-              variant="link"
-              className="text-decoration-none fw-bold text-dark"
-              onClick={handleShow}
-            >
-              LOGIN & REGISTER
-            </Button>
+            {isSignedIn ? (
+              <Button
+                variant="link"
+                className="text-decoration-none fw-bold text-dark"
+                onClick={() => redirect("/account")}
+              >
+                ACCOUNT
+              </Button>
+            ) : (
+              <Button
+                variant="link"
+                className="text-decoration-none fw-bold text-dark"
+                onClick={handleShow}
+              >
+                LOGIN & REGISTER
+              </Button>
+
+            )}
           </div>
 
           <Form className="d-flex me-3 position-relative" onSubmit={(e) => {
@@ -79,11 +91,6 @@ export default function NavbarComponent() {
           </Form>
 
           <div className="d-flex gap-3 align-items-center">
-            <div className="position-relative">
-              <Link href="/account">
-                <FaUser className="text-dark fs-5" />
-              </Link>
-            </div>
             <div className="position-relative">
               <Link href="/wishlists">
                 <FaHeart className="text-dark fs-5" />
