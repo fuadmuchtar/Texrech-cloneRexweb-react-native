@@ -3,7 +3,6 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useState } from "react";
 import Link from "next/link";
 import { ProductType } from "@/app/types";
 import { toRupiah } from "@/helpers/convertCurrency";
@@ -19,6 +18,10 @@ export default function CardProducts({ product }: { product: ProductType }) {
   //   setWishlisted([...wishlisted, slug]);
   // }
   // };
+
+  // const toggleWishlist = async () => {
+
+  // }
 
   return (
     <Col className="mb-4">
@@ -40,7 +43,7 @@ export default function CardProducts({ product }: { product: ProductType }) {
             <div
               className="rounded-circle bg-white p-2 d-flex justify-content-center align-items-center shadow-sm"
               style={{ width: "36px", height: "36px" }}
-              onClick={(e) => toggleWishlist(product.slug, e)}
+            // onClick={(e) => toggleWishlist(product.slug, e)}
             >
               {false ? (
                 <FaHeart className="text-danger" />
