@@ -113,12 +113,12 @@ export default function Footer() {
           </Col>
         </Row>
 
-        <Row className="border-top pt-3 pb-3">
-          <Col className="text-muted">
-            © 2025 REXTECH | Official Site. All Rights Reserved.
-          </Col>
-        </Row>
       </Container>
+      <Row className="border-top pt-3 pb-3">
+        <Col className="text-muted px-5">
+          © 2025 REXTECH | Official Site. All Rights Reserved.
+        </Col>
+      </Row>
     </footer>
   );
 }

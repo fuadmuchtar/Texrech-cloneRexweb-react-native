@@ -3,6 +3,7 @@
 import { handleLogout } from "@/actions";
 import LoginModal from "./LoginModal";
 import { cookies } from "next/headers";
+import SearchForm from "./SearchForm";
 
 export default async function Navbar() {
   const cookieStore = await cookies();
@@ -47,17 +48,7 @@ export default async function Navbar() {
           ) : (
             <LoginModal />
           )}
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          <SearchForm />
           <div className="d-flex gap-3 align-items-center ms-3">
             <button className="btn btn-link position-relative text-decoration-none">
               <a href="/wishlists" className="text-dark">wishlists</a>

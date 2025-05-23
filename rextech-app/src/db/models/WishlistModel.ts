@@ -26,11 +26,11 @@ export default class WishlistModel {
                     'from': 'products',
                     'localField': 'productId',
                     'foreignField': '_id',
-                    'as': 'result'
+                    'as': 'productDetail'
                 }
             }, {
                 '$unwind': {
-                    'path': '$result',
+                    'path': '$productDetail',
                     'preserveNullAndEmptyArrays': false
                 }
             }

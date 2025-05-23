@@ -1,14 +1,27 @@
 "use client";
 import CardProducts from "@/components/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { ProductType } from "../types";
+import { useSearchParams } from "next/navigation";
 
 export default function Search() {
+    const searchParams = useSearchParams()
+    const search = searchParams.get('keyword')
+
     const [searchData, setSearchData] = useState<ProductType[]>([])
 
+    const fetchSearchProduct = async () => {
+        const res = await fetch(`http://localhost:3000/api/products?name=${search}`);
+        const data = await res.json();
+        setSearchData(data);
+    }
 
-    if (!searchData.length || !searchData) {
+    useEffect(() => {
+        fetchSearchProduct();
+    }, []);
+
+    if (!searchData || searchData.length === 0) {
         return (
             <div className="alert alert-warning container mt-5" role="alert">
                 No products were found matching your selection
@@ -16,13 +29,17 @@ export default function Search() {
         );
     }
     return (
-        <Container fluid={true} className="mt-5">
-            <h1 className="text-center mb-5">All Product</h1>
-            <Row xs={1} md={4} className="g-4">
-                {searchData.map((product) => (
-                    <CardProducts key={product._id} product={product} />
-                ))}
-            </Row>
-        </Container>
+        <>
+            <div className="d-flex justify-content-center align-items-center bg-secondary text-white py-5 mb-5">
+                <h4 >{searchData.length} Search Result for: “{search}”</h4>
+            </div>
+            <Container fluid={true}>
+                <Row xs={1} md={4} className="g-4">
+                    {searchData.map((product) => (
+                        <CardProducts key={product._id} product={product} />
+                    ))}
+                </Row>
+            </Container>
+        </>
     );
 }
