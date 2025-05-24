@@ -1,4 +1,5 @@
 import { ProductType } from "@/app/types"
+import ButtonAddToWishlist from "@/components/ButtonAddToWishlist"
 import { toRupiah } from "@/helpers/convertCurrency"
 import { notFound } from "next/navigation"
 
@@ -11,19 +12,6 @@ export default async function ({ params }: { params: Promise<{ slug: string }> }
     }
     const product: ProductType = await res.json()
 
-    const handleAddWishlist = async () => {
-        const res = await fetch("http://localhost:3000/api/wishlists", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                productId: product._id
-            })
-        })
-        const data = await res.json()
-        console.log(data)
-    }
     return (
         // buatkan div dibagi 2
         // kiri untuk gambar produk
@@ -76,7 +64,7 @@ export default async function ({ params }: { params: Promise<{ slug: string }> }
                         <h1 className="fw-bold">{product.name}</h1>
                         <p className="text-muted">{product.description}</p>
                         <p className="text-muted">Rp {toRupiah(product.price)}</p>
-                        <button className="btn btn-primary" onClick={handleAddWishlist}>Add to wishlist</button>
+                        <ButtonAddToWishlist productId={product._id} />
                     </div>
                 </div>
             </div>
