@@ -5,6 +5,7 @@ import LoginModal from "./LoginModal";
 import { cookies } from "next/headers";
 import SearchForm from "./SearchForm";
 import Link from "next/link";
+import { BsFillBagHeartFill } from "react-icons/bs";
 
 export default async function Navbar() {
   const cookieStore = await cookies();
@@ -13,7 +14,7 @@ export default async function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand" href="/">
+        <Link className="navbar-brand fw-bold" href="/">
           REXTECH
         </Link>
         <button
@@ -30,7 +31,7 @@ export default async function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" href="/products">
+              <Link className="nav-link active" href="/products">
                 {/* HOME */}
                 PRODUCTS
               </Link>
@@ -53,11 +54,11 @@ export default async function Navbar() {
             <LoginModal />
           )}
           <SearchForm />
-          <div className="d-flex gap-3 align-items-center ms-3">
-            <button className="btn btn-link position-relative text-decoration-none">
-              <a href="/wishlists" className="text-dark">wishlists</a>
-            </button>
-          </div>
+          <button className="btn position-relative text-decoration-none">
+            <Link href="/wishlists" className="text-dark">
+              <BsFillBagHeartFill style={{ fontSize: 25 }} />
+            </Link>
+          </button>
         </div>
       </div>
     </nav>
