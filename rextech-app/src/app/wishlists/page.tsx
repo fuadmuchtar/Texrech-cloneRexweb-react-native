@@ -1,6 +1,5 @@
 "use client";
 
-import CardProducts from "@/components/Card";
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { ProductType } from "../types";
@@ -18,7 +17,7 @@ export default function Wishlist() {
     const [wishlists, setWishlists] = useState<WishlistItem[]>([])
 
     const fetchwishlists = async () => {
-        const res = await fetch("http://localhost:3000/api/wishlists");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/wishlists`);
         const data = await res.json();
         setWishlists(data);
     }

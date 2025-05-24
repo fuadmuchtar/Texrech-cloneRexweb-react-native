@@ -1,16 +1,27 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import CarouselComponent from "@/components/Carousel";
 import ImageCardComponent from "@/components/ImageCard";
 import { Container } from "react-bootstrap";
+import { ProductType } from "./types";
 
 export default function Home() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const imageCardsRef = useRef<HTMLDivElement>(null);
+  const [featuredProducts, setFeaturedProducts] = useState<ProductType[]>([]);
+
+  const fetchProducts = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api`);
+    const data = await res.json();
+    setFeaturedProducts(data);
+  }
+
+  console.log(featuredProducts);
 
   useEffect(() => {
+    fetchProducts();
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -38,44 +49,38 @@ export default function Home() {
         </p>
       </div>
 
-      <Container ref={cardsRef} className="d-flex flex-row gap-5 align-items-center justify-content-center mt-5 mb-5">
-        {/* Card content remains the same */}
-        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500, padding: 30 }}>
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img src="https://rexus.id/cdn/shop/files/Daxa_Sedna_7_625c6c76-85f0-4489-a6be-2df77052e75e.png?v=1737622106&width=500" className="img-fluid rounded-start" alt="..." />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body h-100 d-flex flex-column justify-content-center">
-                <h5 className="card-title">Rextech Headset Daxa</h5>
-                <p className="card-text">
-                  Rp. 250.000
-                </p>
-                <p className="card-text">
-                  <small className="text-body-secondary">Available: 10</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <Container fluid={true} ref={sectionRef} className="mt-5 mb-5">
 
-        <div className="card mb-3" style={{ maxWidth: 540, minWidth: 500, padding: 30 }}>
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img src="https://rexus.id/cdn/shop/files/Daxa_Sedna_7_625c6c76-85f0-4489-a6be-2df77052e75e.png?v=1737622106&width=500" className="img-fluid rounded-start" alt="..." />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body h-100 d-flex flex-column justify-content-center">
-                <h5 className="card-title">Rextech Headset Daxa</h5>
-                <p className="card-text">
-                  Rp. 250.000
-                </p>
-                <p className="card-text">
-                  <small className="text-body-secondary">Available: 10</small>
-                </p>
+        <div className="row row-cols-1 row-cols-md-2 g-4">
+          {featuredProducts.map((product) => (
+            <div className="col" key={product._id} ref={cardsRef}>
+              <div
+                className="card h-100"
+                onClick={() => window.location.href = `/products/${product.slug}`}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className="row g-0 p-3">
+                  <div className="col-md-4">
+                    <img src={product.thumbnail} width={200} className="img-fluid" alt={product.name} />
+                  </div>
+                  <div className="col-md-8">
+                    <div className="card-body h-100 d-flex flex-column justify-content-center">
+                      <h5 className="card-title">{product.name}</h5>
+                      <p className="card-text">Rp. {product.price.toLocaleString()}</p>
+                      <p className="card-text">
+                        {product.tags.map((tag, index) => (
+                          <span key={index} className="badge bg-secondary me-1">{tag}</span>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+        <div className="text-center mt-4">
+          <a href="/products" className="btn btn-primary rounded-pill px-4 py-2">Lihat Semua Produk</a>
         </div>
       </Container>
 

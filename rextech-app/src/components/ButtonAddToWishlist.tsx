@@ -2,7 +2,7 @@
 
 export default function ButtonAddToWishlist({ productId }: { productId: string }) {
     const handleAddWishlist = async () => {
-        const res = await fetch("http://localhost:3000/api/wishlists", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/wishlists`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

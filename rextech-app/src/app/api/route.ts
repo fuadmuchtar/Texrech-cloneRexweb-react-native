@@ -1,14 +1,12 @@
-import WishlistModel from "@/db/models/WishlistModel";
+import { ProductModel } from "@/db/models/ProductModel";
 import errHandler from "@/helpers/errHandler";
 
 export async function GET(request: Request) {
     try {
-        const userId = request.headers.get("x-user-id")
-        if (!userId) throw { message: "User ID is required", status: 400 }
 
-        const wishlists = await WishlistModel.getWishlistById(userId)
+        const featuredProducts = await ProductModel.getFeaturedProduct()
 
-        return Response.json(wishlists)
+        return Response.json(featuredProducts)
     } catch (error) {
         return errHandler(error)
     }

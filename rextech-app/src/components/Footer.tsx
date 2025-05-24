@@ -1,11 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaYoutube,
-  FaTiktok,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import Link from "next/link";

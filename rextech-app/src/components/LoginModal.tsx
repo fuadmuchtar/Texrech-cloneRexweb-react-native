@@ -5,6 +5,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+// import { toast } from 'react-toastify';
 
 export default function LoginModal() {
     const [show, setShow] = useState(false);
@@ -38,7 +39,7 @@ export default function LoginModal() {
         try {
             if (mode === "login") {
                 const { email, password } = input
-                const res = await fetch("http://localhost:3000/api/login", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login`, {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"
@@ -53,9 +54,19 @@ export default function LoginModal() {
                     email: "",
                     password: ""
                 })
+                // toast.success("Login Success", {
+                //     position: "top-left",
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true
+                // })
+                // kasih delay 5 detik
+                // await new Promise(resolve => setTimeout(resolve, 3000))
+                // redirect to home
                 window.location.href = "/"
             } else {
-                const res = await fetch("http://localhost:3000/api/register", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/register`, {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"

@@ -12,7 +12,7 @@ export default function Search() {
     const [searchData, setSearchData] = useState<ProductType[]>([])
 
     const fetchSearchProduct = async () => {
-        const res = await fetch(`http://localhost:3000/api/products?name=${search}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products?name=${search}`);
         const data = await res.json();
         setSearchData(data);
     }

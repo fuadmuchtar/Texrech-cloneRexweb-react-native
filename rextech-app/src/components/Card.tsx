@@ -8,20 +8,6 @@ import { ProductType } from "@/app/types";
 import { toRupiah } from "@/helpers/convertCurrency";
 
 export default function CardProducts({ product }: { product: ProductType }) {
-  // const [wishlisted, setWishlisted] = useState<string[]>([]);
-
-  // const toggleWishlist = (slug: string, e: React.MouseEvent) => {
-  // e.preventDefault();
-  // if (wishlisted.includes(slug)) {
-  //   setWishlisted(wishlisted.filter((item) => item !== slug));
-  // } else {
-  //   setWishlisted([...wishlisted, slug]);
-  // }
-  // };
-
-  // const toggleWishlist = async () => {
-
-  // }
 
   return (
     <Col className="mb-4">

@@ -22,4 +22,16 @@ export class ProductModel {
         return this.collection().findOne({ slug })
     }
 
+    static async getFeaturedProduct() {
+        return await this.collection().aggregate([
+            {
+                '$sort': {
+                    'updatedAt': -1
+                }
+            }, {
+                '$limit': 4
+            }
+        ]).toArray()
+    }
+
 }

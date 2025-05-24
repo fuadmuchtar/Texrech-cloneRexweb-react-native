@@ -11,7 +11,7 @@ export default function Products() {
     const [endOfPage, setEndOfPage] = useState(false)
 
     const fetchProducts = async () => {
-        const res = await fetch(`http://localhost:3000/api/products?page=${page}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products?page=${page}`);
         const data = await res.json();
         if (data.length < 4) setEndOfPage(true);
         setProducts(prevProducts => [...prevProducts, ...data]);
@@ -41,7 +41,7 @@ export default function Products() {
                     <button className="btn btn-primary mt-4" onClick={() => {
                         setPage((prev) => prev + 1);
                     }}>
-                        load more
+                        see more
                     </button>
                 </div>
             )}
