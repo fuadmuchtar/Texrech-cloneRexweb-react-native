@@ -11,9 +11,9 @@ export default function Footer() {
       <Container>
         <Row className="mb-5">
           {/* Company Information */}
-          <Col lg={4} md={6} className="mb-4 mb-lg-0">
+          <Col className="mb-4 mb-lg-0">
             <div className="mb-4">
-              <h2 className="fw-bold fs-1">REXTECH®</h2>
+              <h2 className="fw-bold fs-1 text-center">REXTECH®</h2>
             </div>
             <p className="text-muted">
               Rextech® merupakan merek produk lokal Indonesia untuk perlengkapan
@@ -28,83 +28,6 @@ export default function Footer() {
               berkulitas namun terjangkau oleh semua kalangan, gamer dan
               profesional, baik pria dan wanita.
             </p>
-          </Col>
-
-          {/* Support Links */}
-          <Col lg={2} md={6} className="mb-4 mb-lg-0 offset-lg-1">
-            <h5 className="fw-bold mb-4">Bantuan & Dukungan</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Panduan Garansi
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Download Software
-                </Link>
-              </li>
-            </ul>
-          </Col>
-
-          {/* About Links */}
-          <Col lg={2} md={6} className="mb-4 mb-lg-0">
-            <h5 className="fw-bold mb-4">Tentang Rextech</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Tentang Kami
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Ketentuan Penggunaan
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Partnership RNET
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Program Rextech Goes to School
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Social Media
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="text-decoration-none text-muted">
-                  Hubungi Kami
-                </Link>
-              </li>
-            </ul>
-          </Col>
-
-          {/* Contact Information */}
-          <Col lg={3} md={6}>
-            <h5 className="fw-bold mb-4">Rextech Headquarter</h5>
-            <div className="d-flex">
-              <div className="me-3">
-                <FaMapMarkerAlt
-                  size={24}
-                  className="text-primary rounded-circle p-1"
-                  style={{ backgroundColor: "#f8f9fa" }}
-                />
-              </div>
-              <div>
-                <p className="text-muted mb-1">
-                  Jl. Sentani Blok C11 No 5 Gunung Sahari Utara, Sawah Besar,
-                  Jakarta Pusat
-                </p>
-                <p className="text-muted">
-                  +62 21 6230 4000 | +62 822 1100 8668
-                </p>
-              </div>
-            </div>
           </Col>
         </Row>
 
