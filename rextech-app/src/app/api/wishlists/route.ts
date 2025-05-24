@@ -25,13 +25,13 @@ export async function POST(request: Request) {
         const userId = request.headers.get("x-user-id")
         if (!userId) throw { message: "User ID is required", status: 400 }
 
-        await WishlistModel.create({
+        const result = await WishlistModel.create({
             userId,
             productId
         })
 
         return Response.json(
-            { message: "Success create wishlist" },
+            { message: result },
             { status: 201 }
         )
     } catch (error) {

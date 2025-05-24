@@ -7,12 +7,21 @@ export default class WishlistModel {
     }
 
     static async create(data: { userId: string, productId: string }) {
+        const exist = await this.collection().
+            findOneAndDelete(
+                {
+                    userId: new ObjectId(data.userId),
+                    productId: new ObjectId(data.productId)
+                }
+            )
+        if (exist) return "Success delete wishlist"
+
         const result = await this.collection().insertOne({
             userId: new ObjectId(data.userId),
             productId: new ObjectId(data.productId)
         })
 
-        return result
+        return "Success create wishlist"
     }
 
     static async getWishlistById(userId: string) {
@@ -38,4 +47,5 @@ export default class WishlistModel {
 
         return wishlists
     }
+
 }
