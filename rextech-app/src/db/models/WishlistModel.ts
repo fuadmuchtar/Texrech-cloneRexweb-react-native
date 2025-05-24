@@ -14,14 +14,14 @@ export default class WishlistModel {
                     productId: new ObjectId(data.productId)
                 }
             )
-        if (exist) return "Success delete wishlist"
+        if (exist) return "Product has been removed from wishlist"
 
         const result = await this.collection().insertOne({
             userId: new ObjectId(data.userId),
             productId: new ObjectId(data.productId)
         })
 
-        return "Success create wishlist"
+        return "Added product to Wishlist"
     }
 
     static async getWishlistById(userId: string) {

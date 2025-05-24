@@ -18,8 +18,6 @@ export default function Home() {
     setFeaturedProducts(data);
   }
 
-  console.log(featuredProducts);
-
   useEffect(() => {
     fetchProducts();
     const observer = new IntersectionObserver((entries) => {

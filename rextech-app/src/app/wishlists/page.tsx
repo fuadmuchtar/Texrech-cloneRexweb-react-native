@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Alert, Card, Col, Container, Row } from "react-bootstrap";
 import { ProductType } from "../types";
 import Link from "next/link";
 import { toRupiah } from "@/helpers/convertCurrency";
+import { FaHeart } from "react-icons/fa";
 
 export default function Wishlist() {
     interface WishlistItem {
@@ -25,7 +26,20 @@ export default function Wishlist() {
         fetchwishlists();
     }, []);
 
-    console.log(wishlists, "<<< ini wishlist")
+    const handleAddWishlist = async (productId: string) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/wishlists`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                productId
+            })
+        })
+        const data = await res.json()
+        alert(data.message);
+        window.location.reload();
+    }
 
     if (!Array.isArray(wishlists)) {
         return (
@@ -61,8 +75,8 @@ export default function Wishlist() {
                                             style={{ width: "36px", height: "36px" }}
                                         // onClick={(e) => toggleWishlist(wishlist.productDetail.slug, e)}
                                         >
+                                            <FaHeart className="text-danger" onClick={() => handleAddWishlist(wishlist.productDetail._id)} />
                                             {/* {false ? (
-                                                <FaHeart className="text-danger" />
                                             ) : (
                                                 <FaRegHeart className="text-secondary" />
                                             )} */}

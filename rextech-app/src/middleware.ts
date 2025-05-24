@@ -25,7 +25,6 @@ export async function middleware(request: Request) {
 
     return response
   } catch (error) {
-    console.log(error)
     return errHandler(error)
   }
 }

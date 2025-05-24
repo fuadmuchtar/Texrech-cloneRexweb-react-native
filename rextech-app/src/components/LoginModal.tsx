@@ -1,11 +1,12 @@
 "use client";
 
+import { customError } from '@/app/types';
 import errHandler from '@/helpers/errHandler';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-// import { toast } from 'react-toastify';
+import { toast, Bounce } from 'react-toastify';
 
 export default function LoginModal() {
     const [show, setShow] = useState(false);
@@ -54,16 +55,13 @@ export default function LoginModal() {
                     email: "",
                     password: ""
                 })
-                // toast.success("Login Success", {
-                //     position: "top-left",
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true
-                // })
-                // kasih delay 5 detik
-                // await new Promise(resolve => setTimeout(resolve, 3000))
-                // redirect to home
+                toast.success("Login Success", {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true
+                })
                 window.location.href = "/"
             } else {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/register`, {
@@ -80,11 +78,30 @@ export default function LoginModal() {
                     email: "",
                     password: ""
                 })
+                toast.success("User has been created successfully", {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true
+                })
                 window.location.href = "/"
                 await new Promise(resolve => setTimeout(resolve, 5000))
                 setMode("login")
             }
-        } catch (error) {
+        } catch (error: customError | any) {
+            toast.error(error.message, {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+
             return errHandler(error)
         }
     };
