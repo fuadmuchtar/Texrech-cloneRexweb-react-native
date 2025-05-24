@@ -1,12 +1,11 @@
 "use client";
 
-import { customError } from '@/app/types';
 import errHandler from '@/helpers/errHandler';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { toast, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export default function LoginModal() {
     const [show, setShow] = useState(false);
@@ -24,7 +23,11 @@ export default function LoginModal() {
 
     const handleModeChange = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        mode === "login" ? setMode("register") : setMode("login");
+        if (mode === "login") {
+            setMode("register");
+        } else {
+            setMode("login");
+        }
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +50,17 @@ export default function LoginModal() {
                     },
                     body: JSON.stringify({ email, password })
                 })
-                if (!res.ok) throw await res.json()
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    toast.error(errorData.message, {
+                        position: "top-left",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true
+                    })
+                    throw errorData;
+                }
 
                 setInput({
                     name: "",
@@ -71,7 +84,18 @@ export default function LoginModal() {
                     },
                     body: JSON.stringify(input)
                 })
-                if (!res.ok) throw await res.json()
+                if (!res.ok) {
+
+                    const errorData = await res.json();
+                    toast.error(errorData.message, {
+                        position: "top-left",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true
+                    })
+                    throw errorData;
+                }
                 setInput({
                     name: "",
                     username: "",
@@ -89,19 +113,7 @@ export default function LoginModal() {
                 await new Promise(resolve => setTimeout(resolve, 5000))
                 setMode("login")
             }
-        } catch (error: customError | any) {
-            toast.error(error.message, {
-                position: "top-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-
+        } catch (error) {
             return errHandler(error)
         }
     };

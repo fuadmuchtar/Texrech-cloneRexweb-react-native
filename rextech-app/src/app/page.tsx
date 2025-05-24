@@ -5,6 +5,7 @@ import CarouselComponent from "@/components/Carousel";
 import ImageCardComponent from "@/components/ImageCard";
 import { Container } from "react-bootstrap";
 import { ProductType } from "./types";
+import Link from "next/link";
 
 export default function Home() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -78,7 +79,7 @@ export default function Home() {
           ))}
         </div>
         <div className="text-center mt-4">
-          <a href="/products" className="btn btn-primary rounded-pill px-4 py-2">Lihat Semua Produk</a>
+          <Link href="/products" className="btn btn-primary rounded-pill px-4 py-2">Lihat Semua Produk</Link>
         </div>
       </Container>
 

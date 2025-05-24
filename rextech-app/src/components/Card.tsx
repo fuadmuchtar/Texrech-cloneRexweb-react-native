@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ProductType } from "@/app/types";
 import { toRupiah } from "@/helpers/convertCurrency";
 import { useState } from "react";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 export default function CardProducts({ product }: { product: ProductType }) {
   const [isHovered, setIsHovered] = useState(false);

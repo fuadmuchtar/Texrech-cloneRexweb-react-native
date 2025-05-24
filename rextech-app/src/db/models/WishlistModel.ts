@@ -16,7 +16,7 @@ export default class WishlistModel {
             )
         if (exist) return "Product has been removed from wishlist"
 
-        const result = await this.collection().insertOne({
+        await this.collection().insertOne({
             userId: new ObjectId(data.userId),
             productId: new ObjectId(data.productId)
         })

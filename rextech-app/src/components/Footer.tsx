@@ -1,9 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import {
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-import Link from "next/link";
 
 export default function Footer() {
   return (

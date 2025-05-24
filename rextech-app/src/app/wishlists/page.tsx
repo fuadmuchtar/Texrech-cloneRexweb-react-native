@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Alert, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { ProductType } from "../types";
 import Link from "next/link";
 import { toRupiah } from "@/helpers/convertCurrency";
 import { FaHeart } from "react-icons/fa";
+import { Bounce, toast } from "react-toastify";
 
 export default function Wishlist() {
     interface WishlistItem {
@@ -37,7 +38,17 @@ export default function Wishlist() {
             })
         })
         const data = await res.json()
-        alert(data.message);
+        toast.success(data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
         window.location.reload();
     }
 

@@ -1,7 +1,7 @@
 import { ProductModel } from "@/db/models/ProductModel";
 import errHandler from "@/helpers/errHandler";
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
 
         const featuredProducts = await ProductModel.getFeaturedProduct()
